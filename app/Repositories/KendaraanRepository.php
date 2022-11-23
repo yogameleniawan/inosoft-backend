@@ -39,6 +39,9 @@ class KendaraanRepository implements KendaraanInterface
         $session->startTransaction();
         try {
             $table = Kendaraan::find($id);
+
+            if (!$table) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
+
             $table->update($payload);
 
             $session->commitTransaction();
@@ -54,11 +57,11 @@ class KendaraanRepository implements KendaraanInterface
         $session = DB::getMongoClient()->startSession();
         $session->startTransaction();
         try {
-            $user = Kendaraan::find($id);
+            $table = Kendaraan::find($id);
 
-            if (!$user) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
+            if (!$table) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
 
-            $user->delete();
+            $table->delete();
 
             $session->commitTransaction();
             return response()->json(['message' => 'Kendaraan dihapus'], Response::HTTP_OK);

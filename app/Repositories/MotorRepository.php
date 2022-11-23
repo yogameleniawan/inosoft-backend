@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Interfaces\MotorInterface;
@@ -37,6 +39,9 @@ class MotorRepository implements MotorInterface
         $session->startTransaction();
         try {
             $table = Motor::find($id);
+
+            if (!$table) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
+
             $table->update($payload);
 
             $session->commitTransaction();
@@ -52,11 +57,11 @@ class MotorRepository implements MotorInterface
         $session = DB::getMongoClient()->startSession();
         $session->startTransaction();
         try {
-            $user = Motor::find($id);
+            $table = Motor::find($id);
 
-            if (!$user) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
+            if (!$table) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
 
-            $user->delete();
+            $table->delete();
 
             $session->commitTransaction();
             return response()->json(['message' => 'Motor dihapus'], Response::HTTP_OK);

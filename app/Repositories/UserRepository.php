@@ -39,6 +39,9 @@ class UserRepository implements UserInterface
         $session->startTransaction();
         try {
             $table = User::find($id);
+
+            if (!$table) return response()->json(['message' => 'ID tidak ada'], Response::HTTP_BAD_REQUEST);
+
             $table->update($payload);
 
             $session->commitTransaction();
