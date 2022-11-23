@@ -18,4 +18,14 @@ class Kendaraan extends Model
         'mobil',
         'motor',
     ];
+
+    public function mobil()
+    {
+        return $this->hasMany(Mobil::class);
+    }
+
+    public function motor()
+    {
+        return $this->hasMany(Motor::class);
+    }
 }

@@ -16,4 +16,9 @@ class Motor extends Model
         'tipe_suspensi',
         'tipe_transimisi',
     ];
+
+    public function kendaraan()
+    {
+        return $this->belongsTo(Kendaraan::class);
+    }
 }

@@ -4,7 +4,10 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\KendaraanController;
 use App\Http\Controllers\Api\MobilController;
 use App\Http\Controllers\Api\MotorController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,8 +41,15 @@ Route::prefix('v1')->group(function () {
                 'mobil' => MobilController::class,
                 'motor' =>  MotorController::class,
                 'kendaraan' =>  KendaraanController::class,
+                'transaction' =>  TransactionController::class,
                 'user' =>  UserController::class,
             ]);
+        });
+
+        Route::prefix('reports')->group(function () {
+            Route::get('/stok', [ReportController::class, 'getStok'])->name('report.stok');
+            Route::get('/total-penjualan', [ReportController::class, 'getPenjualan'])->name('report.penjualan');
+            Route::post('/penjualan-kendaraan', [ReportController::class, 'getPenjualanKendaraan'])->name('report.penjualan.kendaraan');
         });
     });
 });
