@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
@@ -107,12 +108,53 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    public function test_delete_user()
+    public function test_delete_register_user()
     {
-        $response = $this->json('POST', '/api/v1/auth/user/delete', [
-            'email' => 'user@gmail.com'
+        $user = User::where('email', 'user@gmail.com')->first();
+        $response = $this->json('DELETE', route('user.destroy', $user->_id), []);
+
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_get_all_user()
+    {
+        $response = $this->json('GET', route('user.index'), []);
+
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_store_user()
+    {
+        $response = $this->json('POST', route('user.store'), [
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => 'qwerty123'
         ]);
 
-        $response->assertStatus(204);
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_update_user()
+    {
+        $user = User::where('email', 'user@gmail.com')->first();
+        $response = $this->json('PUT', route('user.update', $user->_id), [
+            'name' => 'User Update',
+            'email' => 'user@gmail.com',
+            'password' => 'qwerty123'
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_delete_user()
+    {
+        $user = User::where('email', 'user@gmail.com')->first();
+        $response = $this->json('DELETE', route('user.destroy', $user->_id), []);
+
+        $response->assertStatus(200);
     }
 }

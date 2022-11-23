@@ -112,12 +112,4 @@ class AuthController extends Controller
             ]
         ]);
     }
-
-    public function deleteUser(Request $request)
-    {
-        $user = User::where('email', $request->email);
-        $user->delete();
-
-        return response()->json(['user' => $user], Response::HTTP_NO_CONTENT);
-    }
 }
