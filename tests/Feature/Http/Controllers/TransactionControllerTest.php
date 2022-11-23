@@ -53,7 +53,7 @@ class TransactionControllerTest extends TestCase
      */
     public function test_get_all_transaction($token)
     {
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('GET', route('Transaction.index'), []);
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('GET', route('transaction.index'), []);
 
         $response->assertStatus(200);
     }
@@ -63,7 +63,7 @@ class TransactionControllerTest extends TestCase
      */
     public function test_store_transaction($token)
     {
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('POST', route('Transaction.store'), [
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('POST', route('transaction.store'), [
             'kendaraan' => 'Kendaraan1'
         ]);
 
@@ -76,7 +76,7 @@ class TransactionControllerTest extends TestCase
     public function test_update_transaction($token)
     {
         $transaction = Transaction::where('kendaraan', 'Kendaraan1')->first();
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('PUT', route('Transaction.update', $transaction->_id), [
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('PUT', route('transaction.update', $transaction->_id), [
             'kendaraan' => 'Kendaraan2'
         ]);
 
@@ -89,7 +89,7 @@ class TransactionControllerTest extends TestCase
     public function test_delete_transaction($token)
     {
         $transaction = Transaction::where('kendaraan', 'Kendaraan2')->first();
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('DELETE', route('Transaction.destroy', $transaction->_id), []);
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->json('DELETE', route('transaction.destroy', $transaction->_id), []);
 
         $response->assertStatus(200);
     }
