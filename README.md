@@ -67,5 +67,7 @@ Automasi untuk menjalankan `composer update` atau `npm install` ketika `composer
 2. [Routes Viewer](http://127.0.0.1:8000/routes)   
 Lihat list routes `/routes` langsung dari browser. List route akan tampil apabila  `APP_DEBUG` env bernilai true.
 
+3. [Documentation API Endpoint](https://documenter.getpostman.com/view/13464851/2s8YsnXFw5)
+
 ## Copyright
 2022 [Yoga Meleniawan Pamungkas](https://www.github.com/yogameleniawan/)   
