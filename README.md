@@ -65,7 +65,7 @@ Automasi untuk menjalankan `composer update` atau `npm install` ketika `composer
 	./vendor/bin/phpunit
 	```
 2. [Routes Viewer](localhost:8000/routes)   
-Lihat list routes langsung dari browser.
+Lihat list routes langsung dari browser. List route akan tampil apabila  `APP_DEBUG` env bernilai true.
 
 ## Copyright
 2022 [Yoga Meleniawan Pamungkas](https://www.github.com/yogameleniawan/)   
